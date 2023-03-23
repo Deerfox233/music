@@ -1,0 +1,14 @@
+.player {
+    height: 54px;
+
+    /* 布局 */
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 10px;
+
+    /* 控制最大宽度 */
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

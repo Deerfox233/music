@@ -1,0 +1,22 @@
+.main {
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+}
+
+.playback {
+    display: flex;
+    align-items: center;
+}
+
+.playButton {
+    /* background-color: darkorchid; */
+}
+
+.previousButton {
+    /* background-color: darkorchid; */
+}
+
+.nextButton {
+    /* background-color: darkorchid; */
+}
