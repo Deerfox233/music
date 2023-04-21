@@ -1,5 +1,5 @@
 import { Playback } from "./Playback";
-import { ProgressBar } from "./ProgressBar";
+import { SongInfo } from "./SongInfo";
 import { Utilities } from "./Utilities";
 import styles from "./Player.module.css"
 import { AudioContext, AudioProvider, Children } from "./AudioContext";
@@ -13,7 +13,7 @@ export function Player() {
             <AudioProvider>
                 <PlayerProvider>
                     <Playback />
-                    <ProgressBar />
+                    <SongInfo />
                     <Utilities />
                 </PlayerProvider>
             </AudioProvider>
@@ -50,7 +50,6 @@ export type PlayerContextProps = {
 
     addEndedListener: (listener: () => void) => void,
     removeEndedListener: (listener: () => void) => void,
-    addTimeUpdateListener: (listener: () => void) => void
 }
 
 export const PlayerContext = createContext({} as PlayerContextProps);
@@ -76,7 +75,7 @@ export function PlayerProvider({ children }: Children) {
 
     const currentTrack = () => {
         if (playlist === null || playlist.tracks === undefined) {
-            console.error("something wrong at currentTrack()");
+            console.log("no current track yet");
             return;
         }
         return playlist.tracks[index];
@@ -132,15 +131,6 @@ export function PlayerProvider({ children }: Children) {
         audio.audioRef.current!.removeEventListener("ended", listener);
     }
 
-    const addTimeUpdateListener = (listener: () => void) => {
-        useEffect(() => {
-            audio.audioRef.current!.addEventListener("timeUpdate", listener);
-            return () => {
-                audio.audioRef.current!.removeEventListener("timeUpdate", listener);
-            }
-        }, []);
-    }
-
     return (
         <PlayerContext.Provider value={{
             playlist,
@@ -154,8 +144,7 @@ export function PlayerProvider({ children }: Children) {
             nextSong,
             previousSong,
             addEndedListener,
-            removeEndedListener,
-            addTimeUpdateListener
+            removeEndedListener
         }}>
             {children}
         </PlayerContext.Provider>

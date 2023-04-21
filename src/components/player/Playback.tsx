@@ -32,13 +32,23 @@ function PlayButton(props: ButtonProps) {
     const audio = props.audio;
     const player = props.player;
 
-    audio.addPauseListener(() => {
-        setPaused(true);
-    });
+    useEffect(() => {
+        audio.addPauseListener(() => {
+            setPaused(true);
+        });
+        audio.addPlayListener(() => {
+            setPaused(false);
+        });
 
-    audio.addPlayListener(() => {
-        setPaused(false);
-    });
+        return (() => {
+            audio.removePauseListener(() => {
+                setPaused(true);
+            })
+            audio.removePlayListener(() => {
+                setPaused(false);
+            });
+        })
+    }, []);
 
     useEffect(() => {
         const listener = async () => {

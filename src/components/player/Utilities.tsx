@@ -40,7 +40,7 @@ function VolumeBar(props: VolumeBarProps) {
                 type="range"
                 defaultValue={100}
                 onMouseMove={e => handleVolumeChange(e)}
-            ></input>
+            />
         </div>
     );
 }
@@ -59,12 +59,11 @@ function PlaylistButton(props: PlaylistButtonProps) {
                 onClick={async () => {
                     setListDisplayed(!isListDisplayed);
                     //test
-                    await player.initPlaylist("7396274610");
+                    await player.initPlaylist("6892772775");
                 }}
             >
                 <QueueMusicRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 30 }} />
             </div>
-            {player.index}
             {isListDisplayed ? <Playlist /> : <></>}
         </div>
     )

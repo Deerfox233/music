@@ -47,12 +47,12 @@ export default function handler(request: NextApiRequest, response: NextApiRespon
 
     return new Promise<void>((resolve, reject) => {
         axios.get("http://localhost:3000/playlist/detail?id=" + request.query.id).then(res1 => {
-            axios.get("http://localhost:3000/playlist/track/all?id=" + request.query.id).then(res2 => {
+            axios.get("http://localhost:3000/playlist/track/all?id=" + request.query.id + "&limit=100&offset=0").then(res2 => {
                 const playlistData = res1.data.playlist;
                 playlistData.tracks = res2.data.songs;
                 response.status(200).json(playlistData);
                 resolve();
-            })
+            });
         });
     })
 }

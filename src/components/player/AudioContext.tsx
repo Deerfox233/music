@@ -9,9 +9,14 @@ export type AudioContextProps = {
     play: () => void,
     getDuration: () => number,
     getCurrentTime: () => number,
+    setCurrentTime: (time: number) => void,
     isPaused: () => boolean,
     addPauseListener: (listener: () => void) => void,
+    removePauseListener: (listener: () => void) => void,
     addPlayListener: (listener: () => void) => void,
+    removePlayListener: (listener: () => void) => void,
+    addTimeUpdateListener: (listener: () => void) => void,
+    removeTimeUpdateListener: (listener: () => void) => void
 }
 
 export const AudioContext = createContext({} as AudioContextProps);
@@ -44,26 +49,37 @@ export function AudioProvider({ children }: Children) {
         return audioRef.current!.currentTime;
     }
 
+    const setCurrentTime = (time: number) => {
+        audioRef.current.currentTime = time;
+    }
+
     const isPaused = () => {
         return audioRef.current.paused;
     }
 
     const addPauseListener = (listener: () => void) => {
-        useEffect(() => {
-            audioRef.current.addEventListener("pause", listener);
-            return () => {
-                audioRef.current.removeEventListener("pause", listener);
-            }
-        }, []);
+        audioRef.current.addEventListener("pause", listener);
+
+    }
+
+    const removePauseListener = (listener: () => void) => {
+        audioRef.current.removeEventListener("pause", listener);
     }
 
     const addPlayListener = (listener: () => void) => {
-        useEffect(() => {
-            audioRef.current.addEventListener("play", listener);
-            return () => {
-                audioRef.current.removeEventListener("play", listener);
-            }
-        }, []);
+        audioRef.current.addEventListener("play", listener);
+    }
+
+    const removePlayListener = (listener: () => void) => {
+        audioRef.current.removeEventListener("play", listener);
+    }
+
+    const addTimeUpdateListener = (listener: () => void) => {
+        audioRef.current!.addEventListener("timeupdate", listener);
+    }
+
+    const removeTimeUpdateListener = (listener: () => void) => {
+        audioRef.current!.removeEventListener("timeupdate", listener);
     }
 
     return (
@@ -76,9 +92,14 @@ export function AudioProvider({ children }: Children) {
             play,
             getDuration,
             getCurrentTime,
+            setCurrentTime,
             isPaused,
             addPauseListener,
+            removePauseListener,
             addPlayListener,
+            removePlayListener,
+            addTimeUpdateListener,
+            removeTimeUpdateListener
         }}>
             {children}
             <audio ref={audioRef} src={audioSrc} />

@@ -1,0 +1,68 @@
+.songInfo {
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cover {
+    height: 100%;
+}
+
+.banner {
+    backdrop-filter: blur(20px);
+    background-color: #4d4d4d60;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.songName {
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: small;
+    color: #f1f1f1;
+}
+
+.artistList {
+    line-height: 95%;
+}
+
+.artistName {
+    font-size: x-small;
+    color: #bbbbbb;
+}
+
+.progressBar {
+    display: flex;
+    align-items: center;
+    padding-top: 7px;
+}
+
+.progressRange {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    flex-grow: 1;
+}
+
+.progressRange::-webkit-slider-runnable-track {
+    height: 3px;
+    background: #4b4b4b;
+    background: linear-gradient(0.25turn, #2e75b6, #5bd4ff, #ff5da2, #ffe575);
+}
+
+.progressRange::-webkit-slider-container {
+    overflow: hidden;
+}
+
+.progressRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0px;
+    height: 0px;
+    border: 1px solid transparent;
+    border-image: linear-gradient(#4b4b4b, #4b4b4b) 0 fill / 0 0 0 2 / 0 100vh 1 0;
+}
