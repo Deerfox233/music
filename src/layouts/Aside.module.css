@@ -1,0 +1,35 @@
+.aside {
+    width: 260px;
+    height: 100vh;
+    background-color: #252526;
+    border-style: none solid none none;
+    border-width: 1px;
+    border-color: #3b3b3c;
+}
+
+.logo {
+    /* background-color: aquamarine; */
+    height: 57px;
+    display: flex;
+    align-items: center;
+    padding-left: 26px;
+    gap: 16px;
+}
+
+.searchBar {
+    /* background-color: crimson; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+}
+
+.input {
+    height: 32px;
+    width: 210px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3b3b3c;
+    background-color: #1f1f1f;
+}

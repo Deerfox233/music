@@ -1,0 +1,5 @@
+.content {
+    background-color: #1f1f1f;
+    flex-grow: 1;
+    /* display: flex; */
+}

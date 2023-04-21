@@ -1,3 +1,50 @@
+.utilities {
+    /* background-color: darkseagreen; */
+    display: flex;
+    justify-content: center;
+}
+
 .volumeBar {
-    background-color: chartreuse;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    padding-top: 9px;
+    padding-right: 3%;
+}
+
+.playlistButton {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 7%;
+}
+
+.volumeRange {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 3px;
+    background-color: transparent;
+    width: 72px;
+}
+
+.volumeRange::-webkit-slider-runnable-track {
+    height: 3px;
+    border-radius: 3px;
+    background: #4b4b4b;
+}
+
+.volumeRange::-webkit-slider-container {
+    height: 30px;
+    overflow: hidden;
+}
+
+.volumeRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border: 1px solid transparent;
+    margin-top: -5px;
 }

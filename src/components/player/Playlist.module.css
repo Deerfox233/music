@@ -1,0 +1,12 @@
+.playlist {
+    background-color: cornflowerblue;
+    position: fixed;
+    right: 0;
+    top: 57px;
+    width: 300px;
+    height:calc(100vh - 57px);
+}
+
+.title {
+    background-color:greenyellow;
+}

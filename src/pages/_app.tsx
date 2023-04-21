@@ -1,6 +1,36 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import localFont from "next/font/local"
+
+const centuryGothic = localFont({
+    src: [
+      {
+        path: './fonts/GOTHIC.woff',
+        weight: '400',
+        style: 'normal',
+      },
+      {
+        path: './fonts/GOTHICI.woff',
+        weight: '400',
+        style: 'italic',
+      },
+      {
+        path: './fonts/GOTHICB.woff',
+        weight: '700',
+        style: 'normal',
+      },
+      {
+        path: './fonts/GOTHICBI.woff',
+        weight: '700',
+        style: 'italic',
+      },
+    ],
+  })
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    return (
+        <main className={centuryGothic.className}>
+            <Component {...pageProps} />
+        </main>
+    )
 }
