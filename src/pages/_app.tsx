@@ -4,28 +4,28 @@ import localFont from "next/font/local"
 
 const centuryGothic = localFont({
     src: [
-      {
-        path: './fonts/GOTHIC.woff',
-        weight: '400',
-        style: 'normal',
-      },
-      {
-        path: './fonts/GOTHICI.woff',
-        weight: '400',
-        style: 'italic',
-      },
-      {
-        path: './fonts/GOTHICB.woff',
-        weight: '700',
-        style: 'normal',
-      },
-      {
-        path: './fonts/GOTHICBI.woff',
-        weight: '700',
-        style: 'italic',
-      },
+        {
+            path: './fonts/GOTHIC.woff',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: './fonts/GOTHICI.woff',
+            weight: '400',
+            style: 'italic',
+        },
+        {
+            path: './fonts/GOTHICB.woff',
+            weight: '700',
+            style: 'normal',
+        },
+        {
+            path: './fonts/GOTHICBI.woff',
+            weight: '700',
+            style: 'italic',
+        },
     ],
-  })
+})
 
 export default function App({ Component, pageProps }: AppProps) {
     return (

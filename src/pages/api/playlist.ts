@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance, { Base } from "../../util/axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Artist, Song } from "./song";
 
@@ -14,23 +14,35 @@ export class Playlist {
     }
 
     static async fetchInfoAsync(ID: string) {
-        return new Promise<Playlist>((resolve, reject) => {
-            axios.get("http://localhost:5000/api/playlist", {
-                params: {
-                    id: ID
-                }
-            }).then(res => {
-                const playlistData = res.data;
+        const axios = instance(Base.IN);
+        return new Promise<Playlist>(async (resolve, reject) => {
+            try {
+                const playlistData: { name: string, tracks: [] } = await axios.get("/api/playlist", {
+                    params: {
+                        id: ID
+                    }
+                });
                 const name = playlistData.name;
-                const tracks = (playlistData.tracks as []).map((track: { id: string, name: string, ar: [], al: { picUrl: string } }) => {
-                    const artists: Artist[] = track.ar.map((artist: { id: string, name: string }) => {
+                const tracks = (playlistData.tracks as []).map((track: {
+                    id: string,
+                    name: string,
+                    ar: [],
+                    al: { picUrl: string }
+                }) => {
+                    const artists: Artist[] = track.ar.map((artist: {
+                        id: string,
+                        name: string
+                    }) => {
                         return new Artist(artist.id, artist.name);
                     })
                     return new Song(track.id, track.name, artists, track.al.picUrl);
                 });
                 resolve(new Playlist(ID, name, tracks));
-            });
-        })
+            } catch (e) {
+                console.error(e);
+                reject();
+            }
+        });
     };
 
     async fetchAllTracksUrl() {
@@ -42,17 +54,35 @@ export class Playlist {
     }
 }
 
-export default function handler(request: NextApiRequest, response: NextApiResponse<Playlist>) {
+export default async function handler(request: NextApiRequest, response: NextApiResponse) {
     console.log("[playlist handler] ID: " + request.query.id);
 
-    return new Promise<void>((resolve, reject) => {
-        axios.get("http://localhost:3000/playlist/detail?id=" + request.query.id).then(res1 => {
-            axios.get("http://localhost:3000/playlist/track/all?id=" + request.query.id + "&limit=100&offset=0").then(res2 => {
-                const playlistData = res1.data.playlist;
-                playlistData.tracks = res2.data.songs;
-                response.status(200).json(playlistData);
-                resolve();
-            });
-        });
-    })
+    const axios = instance(Base.EX);
+    return new Promise<void>(async (resolve, reject) => {
+        try {
+            const detail: { playlist: { tracks: [] } }
+                = await axios.get("/playlist/detail", {
+                    params: {
+                        id: request.query.id
+                    }
+                });
+            const playlistData = detail.playlist;
+
+            const allTracks: { songs: [] }
+                = await axios.get("/playlist/track/all", {
+                    params: {
+                        id: request.query.id,
+                        limit: 100,
+                        offset: 0
+                    }
+                });
+            playlistData.tracks = allTracks.songs;
+
+            response.status(200).json(playlistData);
+            resolve();
+        } catch (e) {
+            console.error(e);
+            reject();
+        }
+    });
 }

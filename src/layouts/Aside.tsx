@@ -5,12 +5,30 @@ import EqualizerRoundedIcon from '@mui/icons-material/EqualizerRounded';
 import HeadphonesRoundedIcon from '@mui/icons-material/HeadphonesRounded';
 import NightlifeRoundedIcon from '@mui/icons-material/NightlifeRounded';
 import AlbumRoundedIcon from '@mui/icons-material/AlbumRounded';
+import { useState } from "react";
 
 export function Aside() {
     return (
         <div className={styles.aside}>
             <Logo />
             <SearchBar />
+            <AccountCard />
+        </div>
+    );
+}
+
+function AccountCard() {
+    return (
+        <div className={styles.accountCard}>
+            <Avatar />
+        </div>
+    )
+}
+
+function Avatar() {
+    return (
+        <div className={styles.avatar}>
+            avatar
         </div>
     );
 }
@@ -29,11 +47,18 @@ function Logo() {
 }
 
 function SearchBar() {
+    const [keywords, setKeywords] = useState("");
+
     return (
         <div className={styles.searchBar}>
             <input
                 type="text"
                 className={styles.input}
+                placeholder="搜索"
+                value={keywords}
+                onChange={(e) => {
+                    setKeywords(e.target.value);
+                }}
             />
         </div>
     );

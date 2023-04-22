@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import instance, { Base } from "@/util/axios";
 
 export class Song {
     ID: string;
@@ -18,19 +19,23 @@ export class Song {
     async fetchUrl() {
         // console.log("fetch url");
 
-        return new Promise<string | undefined>((resolve, reject) => {
-            if (this.url === undefined) {
-                axios.get("http://localhost:5000/api/song", {
-                    params: {
-                        id: this.ID,
-                    }
-                }).then(res => {
-                    const songData = res.data;
+        const axios = instance(Base.IN);
+        return new Promise<string | undefined>(async (resolve, reject) => {
+            try {
+                if (this.url === undefined) {
+                    const songData: { url: string } = await axios.get("/api/song", {
+                        params: {
+                            id: this.ID,
+                        }
+                    });
                     this.url = songData.url;
                     resolve(this.url);
-                });
-            } else {
-                resolve(this.url);
+                } else {
+                    resolve(this.url);
+                }
+            } catch (e) {
+                console.error(e);
+                reject();
             }
         });
     }
@@ -46,14 +51,18 @@ export class Artist {
     }
 }
 
-export default function handler(request: NextApiRequest, response: NextApiResponse<Song>) {
+export default function handler(request: NextApiRequest, response: NextApiResponse) {
     console.log("[song handler] ID: " + request.query.id);
 
-    return new Promise<void>((resolve, reject) => {
-        axios.get("http://localhost:3000/song/url?id=" + request.query.id).then(res => {
-            const songData = res.data.data[0];
-            response.status(200).json(songData);
+    const axios = instance(Base.EX);
+    return new Promise<void>(async (resolve, reject) => {
+        try {
+            const songData = await axios.get("/song/url?id=" + request.query.id);
+            response.status(200).json(songData.data[0]);
             resolve();
-        });
-    })
+        } catch (e) {
+            console.error(e);
+            reject();
+        }
+    });
 }

@@ -5,6 +5,9 @@
     border-style: none solid none none;
     border-width: 1px;
     border-color: #3b3b3c;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .logo {
@@ -32,4 +35,35 @@
     border-width: 1px;
     border-color: #3b3b3c;
     background-color: #1f1f1f;
+
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    font-family: "Century G";
+}
+
+@font-face {
+    font-family: "Century G";
+    src: url("../pages/fonts/GOTHIC.woff");
+}
+
+.input:focus {
+    outline: 0;
+}
+
+.input:valid {
+    outline: 0;
+}
+
+.accountCard {
+    background-color: aquamarine;
+    position: absolute;
+    bottom: 0px;
+    width: 260px;
+    height: 59px;
+}
+
+.avatar {
+    background-color: coral;
+    width: 59px;
+    height: 59px;
 }

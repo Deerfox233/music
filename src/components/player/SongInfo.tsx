@@ -57,7 +57,6 @@ type ProgressBarProps = BannerProps;
 
 function ProgressBar(props: ProgressBarProps) {
     const [progress, setProgress] = useState(0);
-    const player = props.player;
     const audio = props.audio;
 
     const [mounted, setMounted] = useState(true);

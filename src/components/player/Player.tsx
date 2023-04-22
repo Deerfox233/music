@@ -66,7 +66,6 @@ export function PlayerProvider({ children }: Children) {
             console.log("init playlist");
             const playlist = await Playlist.fetchInfoAsync(playlistID);
             setPlaylist(playlist);
-            setIndex(0);
             playlist.tracks![index].fetchUrl().then(url => {
                 audio.setAudioSrc(url!);
             });
@@ -90,8 +89,7 @@ export function PlayerProvider({ children }: Children) {
         //sequential test
         console.log("next song player");
         if (playlist.tracks[index + 1] !== undefined) {
-            setIndex(index + 1);
-
+            setIndex((index + 1));
             console.log("fetch next song");
             playlist.tracks[index + 1].fetchUrl().then(url => {
                 audio.setAudioSrc(url!);
