@@ -30,7 +30,8 @@ function Cover(props: PlayerAsProp) {
                 width={47}
                 height={47}
                 src={player.currentTrack() ? player.currentTrack()?.coverUrl! : "https://via.placeholder.com/47x47"}
-                alt="Cover" />
+                alt="Cover"
+            />
         </div>
     )
 }

@@ -55,15 +55,39 @@
 }
 
 .accountCard {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     position: absolute;
     bottom: 0px;
-    width: 260px;
-    height: 59px;
+    width: inherit;
+    display: flex;
+    padding-bottom: 5px;
 }
 
 .avatar {
-    background-color: coral;
+    /* background-color: coral; */
     width: 59px;
     height: 59px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username {
+    /* background-color: cornflowerblue; */
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+}
+
+.loginButton {
+    background-color: crimson;
+    width: 88px;
+    height: 28px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+    font-weight: bold;
 }

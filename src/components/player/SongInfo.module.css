@@ -29,6 +29,7 @@
 
 .artistList {
     line-height: 95%;
+    white-space: nowrap;
 }
 
 .artistName {

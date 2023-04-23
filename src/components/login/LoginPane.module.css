@@ -1,3 +1,61 @@
-.loginPane {}
+.background {
+    background-color: #00000060;
+    backdrop-filter: blur(20px);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99;
+}
 
-.QRCode {}
+.loginPane {
+    background-color: #1d1d1f;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    overflow: hidden;
+    position: fixed;
+    width: 800px;
+    height: 560px;
+    z-index: 100;
+    top: calc(50vh - 280px);
+    left: calc(50vw - 400px);
+
+    display: flex;
+    justify-content: center;
+}
+
+.desc {
+    font-weight: lighter;
+    font-size: larger;
+    padding-top: 130px;
+}
+
+.QRCode {
+    filter: invert(.887);
+    border-color: #30303030;
+    border-style: solid;
+    border-width: 4px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: fixed;
+    top: calc(280px - 100px);
+    left: calc(400px - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeButton {
+    clip-path: circle(50% at 50% 50%);
+    background-color: #37373a60;
+    backdrop-filter: blur(20px);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 25px;
+    right: 25px;
+}
