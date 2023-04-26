@@ -10,13 +10,9 @@ import { Song } from "@/pages/api/song";
 export function Player() {
     return (
         <div className={styles.player}>
-            <AudioProvider>
-                <PlayerProvider>
-                    <Playback />
-                    <SongInfo />
-                    <Utilities />
-                </PlayerProvider>
-            </AudioProvider>
+            <Playback />
+            <SongInfo />
+            <Utilities />
         </div>
     );
 }
@@ -43,7 +39,8 @@ export type PlayerContextProps = {
     mode: Mode,
     setMode: Dispatch<Mode>,
 
-    initPlaylist: (playlistID: string) => void,
+    initPlaylist: (playlist: Playlist) => void,
+    initPlaylistByID: (playlistID: string) => void,
     currentTrack: () => Song | undefined,
     nextSong: () => void,
     previousSong: () => void,
@@ -61,15 +58,32 @@ export function PlayerProvider({ children }: Children) {
     const [index, setIndex] = useState(0);
     const [mode, setMode] = useState(Mode.SEQUENTIAL);
 
-    const initPlaylist = async (playlistID: string) => {
-        if (playlist === null) {
-            console.log("init playlist");
-            const playlist = await Playlist.fetchInfoAsync(playlistID);
-            setPlaylist(playlist);
-            playlist.tracks![index].fetchUrl().then(url => {
-                audio.setAudioSrc(url!);
-            });
-        }
+    const initPlaylistByID = async (playlistID: string) => {
+        audio.pause();
+        const playlist = await Playlist.fetchInfoAsync(playlistID);
+
+        setPlaylist(playlist);
+        console.log(playlist);
+
+        setIndex(0);
+
+        playlist.tracks![0].fetchUrl().then(song => {
+            audio.setAudioSrc(song?.url!);
+            audio.setCurrentTime(0);
+        });
+    }
+
+    const initPlaylist = async (playlist: Playlist) => {
+        audio.pause();
+        setPlaylist(playlist);
+        console.log(playlist);
+
+        setIndex(0);
+
+        playlist.tracks![0].fetchUrl().then(song => {
+            audio.setAudioSrc(song?.url!);
+            audio.setCurrentTime(0);
+        });
     }
 
     const currentTrack = () => {
@@ -87,12 +101,12 @@ export function PlayerProvider({ children }: Children) {
         }
 
         //sequential test
-        console.log("next song player");
         if (playlist.tracks[index + 1] !== undefined) {
             setIndex((index + 1));
+
             console.log("fetch next song");
-            playlist.tracks[index + 1].fetchUrl().then(url => {
-                audio.setAudioSrc(url!);
+            playlist.tracks[index + 1].fetchUrl().then(song => {
+                audio.setAudioSrc(song?.url!);
                 setTimeout(() => {
                     audio.play();
                 }, 500);
@@ -107,13 +121,12 @@ export function PlayerProvider({ children }: Children) {
         }
 
         //sequential test
-        console.log("previous song player");
         if (playlist.tracks[index - 1] !== undefined) {
             setIndex(index - 1);
 
             console.log("fetch previous song");
-            playlist.tracks[index - 1].fetchUrl().then(url => {
-                audio.setAudioSrc(url!);
+            playlist.tracks[index - 1].fetchUrl().then(song => {
+                audio.setAudioSrc(song?.url!);
                 setTimeout(() => {
                     audio.play();
                 }, 500);
@@ -138,6 +151,7 @@ export function PlayerProvider({ children }: Children) {
             mode,
             setMode,
             initPlaylist,
+            initPlaylistByID,
             currentTrack,
             nextSong,
             previousSong,

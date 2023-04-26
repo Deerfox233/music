@@ -1,5 +1,6 @@
 .aside {
     width: 260px;
+    min-width: 260px;
     height: 100vh;
     background-color: #252526;
     border-style: none solid none none;
@@ -15,7 +16,7 @@
     height: 57px;
     display: flex;
     align-items: center;
-    padding-left: 26px;
+    justify-content: center;
     gap: 16px;
 }
 

@@ -1,0 +1,20 @@
+.carousel {
+    /* background-color: lightcoral; */
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    overflow-x: scroll;
+}
+
+.banner {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 783px;
+    height: 290px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}

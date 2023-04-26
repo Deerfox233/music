@@ -87,8 +87,6 @@ function PreviousButton(props: ButtonProps) {
     return (
         <div className={styles.previousButton}
             onClick={async () => {
-                console.log("previous song button");
-
                 await player.previousSong();
             }}
         >
@@ -104,8 +102,6 @@ function NextButton(props: ButtonProps) {
     return (
         <div className={styles.nextButton}
             onClick={async () => {
-                console.log("next song button");
-
                 await player.nextSong();
             }}
         >

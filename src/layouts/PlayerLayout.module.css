@@ -1,0 +1,11 @@
+.main {
+    background-color: #1f1f1f;
+    flex-grow: 1;
+    display: flex;
+}
+
+.content {
+    padding-top: 57px;
+    height: 100vh;
+    overflow-y: scroll;
+}

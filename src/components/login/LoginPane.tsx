@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./LoginPane.module.css";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import { LoginProps } from "@/layouts/Aside";
+import { LoginProps, Logo } from "@/layouts/Aside";
 import instance, { Base } from "@/util/axios";
 import Image from "next/image";
 
@@ -13,7 +13,7 @@ export function LoginPane(props: LoginProps) {
             <div className={styles.loginPane}>
                 <CloseButton login={login} />
                 <span className={styles.desc}>
-                    扫描二维码登录
+                    <Logo size={30}/>
                 </span>
                 <QRCode />
             </div>

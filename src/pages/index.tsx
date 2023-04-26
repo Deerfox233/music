@@ -1,16 +1,6 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { Aside } from '@/layouts/Aside'
-import { Content } from '@/layouts/Content'
-import { GetServerSideProps } from 'next'
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    return {
-        props: {
-
-        }
-    }
-}
+import { Carousel } from '@/components/main/Carousel'
 
 export default function Home() {
     return (
@@ -21,8 +11,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Aside />
-            <Content />
+            <Carousel />
         </div>
     )
 }

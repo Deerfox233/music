@@ -12,7 +12,7 @@ export function SongInfo() {
     return (
         <div className={styles.songInfo}>
             <Cover player={player} />
-            <Banner player={player} audio={audio} />
+            <SongProgress player={player} audio={audio} />
         </div>
     );
 }
@@ -41,12 +41,12 @@ type BannerProps = {
     player: PlayerContextProps
 }
 
-function Banner(props: BannerProps) {
+function SongProgress(props: BannerProps) {
     const audio = props.audio;
     const player = props.player;
 
     return (
-        <div className={styles.banner}>
+        <div className={styles.songProgress}>
             <SongName player={player} />
             <ArtistList player={player} />
             {player.currentTrack() ? <ProgressBar player={player} audio={audio} /> : <></>}
@@ -115,19 +115,19 @@ function ArtistList(props: PlayerAsProp) {
 
     let artistList;
     if (player.currentTrack() !== undefined) {
-        artistList = player.currentTrack()!.artist!.map((artist, index) => {
+        artistList = player.currentTrack()!.artists!.map((artist, index) => {
             return (
                 <span key={artist.name}>
                     <a href={artist.name}
                         className={styles.artistName}>
                         {artist.name}
                     </a>
-                    {index !== player.currentTrack()!.artist!.length - 1 ?
+                    {index !== player.currentTrack()!.artists!.length - 1 ?
                         <span className={styles.artistName}>{"· "}</span> :
                         <></>
                     }
                 </span >
-            )
+            );
         });
     } else {
         artistList = (<br />);

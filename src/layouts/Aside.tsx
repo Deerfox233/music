@@ -15,7 +15,7 @@ export function Aside() {
 
     return (
         <div className={styles.aside}>
-            <Logo />
+            <Logo size={20} />
             <SearchBar />
             <AccountCard login={login} />
             {openLoginPane ? <LoginPane login={login} /> : <></>}
@@ -81,15 +81,17 @@ function LoginButton(props: LoginProps) {
     )
 }
 
-function Logo() {
+export function Logo(props: { size: number }) {
+    const size = props.size;
+
     return (
         <div className={styles.logo}>
-            <NightlifeRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
-            <AlbumRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
-            <HeadphonesRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
-            <EqualizerRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
-            <PianoRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
-            <MusicNoteRoundedIcon htmlColor="#eeeeee" style={{ fontSize: 20 }} />
+            <NightlifeRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
+            <AlbumRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
+            <HeadphonesRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
+            <EqualizerRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
+            <PianoRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
+            <MusicNoteRoundedIcon htmlColor="#eeeeee" style={{ fontSize: size }} />
         </div>
     );
 }

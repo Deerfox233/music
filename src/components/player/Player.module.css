@@ -1,5 +1,6 @@
 .player {
     height: 57px;
+    min-height: 57px;
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
     gap: 10px;

@@ -1,6 +1,10 @@
+import { AudioProvider } from '@/components/player/AudioContext'
+import { PlayerProvider } from '@/components/player/Player'
+import { PlayerLayout } from '@/layouts/PlayerLayout'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import localFont from "next/font/local"
+import { useState } from 'react'
 
 const centuryGothic = localFont({
     src: [
@@ -30,7 +34,9 @@ const centuryGothic = localFont({
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <main className={centuryGothic.className}>
-            <Component {...pageProps} />
+            <PlayerLayout>
+                <Component {...pageProps} />
+            </PlayerLayout>
         </main>
     )
 }

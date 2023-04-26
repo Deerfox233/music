@@ -51,6 +51,7 @@ export function AudioProvider({ children }: Children) {
 
     const setCurrentTime = (time: number) => {
         audioRef.current.currentTime = time;
+        audioRef.current.dispatchEvent(new Event("timeupdate"));
     }
 
     const isPaused = () => {
@@ -59,7 +60,6 @@ export function AudioProvider({ children }: Children) {
 
     const addPauseListener = (listener: () => void) => {
         audioRef.current.addEventListener("pause", listener);
-
     }
 
     const removePauseListener = (listener: () => void) => {
@@ -101,8 +101,8 @@ export function AudioProvider({ children }: Children) {
             addTimeUpdateListener,
             removeTimeUpdateListener
         }}>
+            <audio ref={audioRef} src={audioSrc} style={{ position: "absolute" }} />
             {children}
-            <audio ref={audioRef} src={audioSrc} />
         </AudioContext.Provider>
     )
 }

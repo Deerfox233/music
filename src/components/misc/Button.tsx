@@ -1,13 +1,13 @@
 import styles from "./Misc.module.css"
 
-type ButtonType = {
-    
+type ButtonProps = {
+
 }
 
-function Button() {
+export function Button() {
     return (
         <div className={styles.button}>
-
+            button
         </div>
     )
 }

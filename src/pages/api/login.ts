@@ -8,13 +8,24 @@ type Data = {
 }
 
 export default function handler(request: NextApiRequest, response: NextApiResponse) {
-    console.log("[login] ");
+    console.log("[login]");
 
     return new Promise<void>(async (resolve, reject) => {
         try {
             const key = await generateQRKey();
             const code = await generateQRCode(key);
+            const status = await checkQRCodeStatus(key);
             response.status(200).json(code.qrimg);
+            // setInterval(() => {
+            //     const status = checkQRCodeStatus(key);
+            //     switch (Number(status)) {
+            //         case 801:
+
+            //         case 803:
+
+            //     }
+            // });
+
             resolve();
         } catch (e) {
             console.error(e);
@@ -45,6 +56,13 @@ const generateQRCode = async (key: string) => {
     return code.data;
 }
 
-const checkQRCodeStatus = () => {
-
+const checkQRCodeStatus = async (key: string) => {
+    const timestamp = Date.now();
+    const status = await axios.get("/login/qr/check", {
+        params: {
+            key,
+            timestamp
+        }
+    });
+    return status;
 }

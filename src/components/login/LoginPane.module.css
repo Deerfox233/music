@@ -26,18 +26,18 @@
 .desc {
     font-weight: lighter;
     font-size: larger;
-    padding-top: 130px;
+    padding-top: 80px;
 }
 
 .QRCode {
     filter: invert(.887);
     border-color: #30303030;
     border-style: solid;
-    border-width: 4px;
+    border-width: 1px;
     width: 200px;
     height: 200px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 15px;
     position: fixed;
     top: calc(280px - 100px);
     left: calc(400px - 100px);
