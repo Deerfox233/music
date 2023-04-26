@@ -15,7 +15,10 @@ export default function handler(request: NextApiRequest, response: NextApiRespon
             const key = await generateQRKey();
             const code = await generateQRCode(key);
             const status = await checkQRCodeStatus(key);
-            response.status(200).json(code.qrimg);
+            response.status(200).json({
+                code: code.qrimg,
+                key: key
+            });
             // setInterval(() => {
             //     const status = checkQRCodeStatus(key);
             //     switch (Number(status)) {

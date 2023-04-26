@@ -3,6 +3,9 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
 import SkipPreviousRoundedIcon from '@mui/icons-material/SkipPreviousRounded';
+import LoopRoundedIcon from '@mui/icons-material/LoopRounded';
+import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import { useContext, useEffect, useState } from "react";
 import { AudioContext, AudioContextProps } from "./AudioContext";
 import { PlayerContext, PlayerContextProps } from "./Player";
@@ -14,9 +17,11 @@ export function Playback() {
     return (
         <div className={styles.main}>
             <div className={styles.playback}>
+                <RandomButton />
                 <PreviousButton audio={audio} player={player} />
                 <PlayButton audio={audio} player={player} />
                 <NextButton audio={audio} player={player} />
+                <LoopButton />
             </div>
         </div>
     );
@@ -106,6 +111,23 @@ function NextButton(props: ButtonProps) {
             }}
         >
             <SkipNextRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 30 }} />
+        </div>
+    )
+}
+
+function LoopButton() {
+    return (
+        <div className={styles.loopButton}>
+            <LoopRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 16 }} />
+            {/* <ReplayRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 16 }} /> */}
+        </div>
+    )
+}
+
+function RandomButton() {
+    return (
+        <div className={styles.randomButton}>
+            <ShuffleRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 16 }} />
         </div>
     )
 }

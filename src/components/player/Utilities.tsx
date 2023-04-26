@@ -59,7 +59,7 @@ function PlaylistButton(props: PlaylistButtonProps) {
                 onClick={async () => {
                     setListDisplayed(!isListDisplayed);
                     //test
-                    await player.initPlaylistByID("7141472405");
+                    await player.initPlaylistByID("6892772775");
                 }}
             >
                 <QueueMusicRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 30 }} />

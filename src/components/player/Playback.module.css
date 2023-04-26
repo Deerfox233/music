@@ -20,3 +20,13 @@
 .nextButton {
     /* background-color: darkorchid; */
 }
+
+.randomButton {
+    /* background-color: darkorchid; */
+    margin-right: 8px;
+}
+
+.loopButton {
+    /* background-color: darkorchid; */
+    margin-left: 8px;
+}

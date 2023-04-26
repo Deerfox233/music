@@ -8,7 +8,9 @@
 }
 
 .loginPane {
-    background-color: #1d1d1f;
+    /* background-color: #1d1d1f; */
+    background-color: white;
+    
     backdrop-filter: blur(20px);
     border-radius: 10px;
     overflow: hidden;
@@ -30,7 +32,8 @@
 }
 
 .QRCode {
-    filter: invert(.887);
+    /* filter: invert(.887); */
+
     border-color: #30303030;
     border-style: solid;
     border-width: 1px;
@@ -47,8 +50,10 @@
 }
 
 .closeButton {
+    /* background-color: #37373a60; */
+    background-color: #aaaaaa60;
+
     clip-path: circle(50% at 50% 50%);
-    background-color: #37373a60;
     backdrop-filter: blur(20px);
     width: 36px;
     height: 36px;

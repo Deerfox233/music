@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { Carousel } from '@/components/main/Carousel'
+import { Recommend } from '@mui/icons-material'
 
 export default function Home() {
     return (
@@ -12,6 +13,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Carousel />
+            {/* <Recommend /> */}
         </div>
     )
 }
