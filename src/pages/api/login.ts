@@ -14,21 +14,10 @@ export default function handler(request: NextApiRequest, response: NextApiRespon
         try {
             const key = await generateQRKey();
             const code = await generateQRCode(key);
-            const status = await checkQRCodeStatus(key);
             response.status(200).json({
                 code: code.qrimg,
                 key: key
             });
-            // setInterval(() => {
-            //     const status = checkQRCodeStatus(key);
-            //     switch (Number(status)) {
-            //         case 801:
-
-            //         case 803:
-
-            //     }
-            // });
-
             resolve();
         } catch (e) {
             console.error(e);

@@ -43,15 +43,15 @@ function QRCode(props: { setLoading: Dispatch<SetStateAction<boolean>> }) {
     }
 
     useEffect(() => {
+        const axios = instance(Base.EX);
 
-        const checkStatus = async (key: string) => {
+        const checkQRStatus = async (key: string) => {
             console.log("check key ", key);
-            const axios = instance(Base.EX);
             const timestamp = Date.now();
             const status: {
                 code: number,
                 message: string,
-                cookie: {}
+                cookie: string
             } = await axios.get("login/qr/check", {
                 params: {
                     key,
@@ -62,22 +62,33 @@ function QRCode(props: { setLoading: Dispatch<SetStateAction<boolean>> }) {
             return status;
         }
 
+        const checkLoginStatus = async (cookie: string) => {
+            console.log("check login status");
+            const timestamp = Date.now();
+            const status = await axios.get("login/status", {
+                params: {
+                    cookie,
+                    timestamp
+                }
+            });
+
+            return status;
+        }
+
         generateQRCode().then(key => {
             timerIDs.push(setInterval(async () => {
-                checkStatus(key).then(status => {
+                checkQRStatus(key).then(async status => {
                     props.setLoading(false);
-
                     for (let i = 0; i < timerIDs.length - 1; i++) {
                         clearInterval(timerIDs[i]);
                     }
-
                     setStatus(status.message);
-
                     console.log(status);
                     if (status.code === 803) {          // 验证成功操作
                         clearInterval(timerIDs[timerIDs.length - 1]);
-
-                        
+                        localStorage.setItem("loginCookie", status.cookie);
+                        const loginState = await checkLoginStatus(status.cookie);
+                        console.log(loginState);
                     }
                 });
             }, 2000));

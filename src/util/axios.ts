@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export enum Base {
     IN = "http://localhost:5000",
-    EX = "http://localhost:3000",
+    // EX = "http://localhost:3000",
+    EX = "https://netease-cloud-music-api-kevinacid.vercel.app",
 }
 
 const instance = (base: Base) => {

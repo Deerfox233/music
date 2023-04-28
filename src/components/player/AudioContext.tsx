@@ -1,4 +1,4 @@
-import { Dispatch, RefObject, createContext, useRef, useState } from "react"
+import { Dispatch, RefObject, createContext, useRef, useState } from "react";
 
 export type AudioContextProps = {
     audioRef: RefObject<HTMLAudioElement>,
