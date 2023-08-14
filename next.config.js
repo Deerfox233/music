@@ -20,6 +20,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'p2.music.126.net',
             },
+            {
+                protocol: 'http',
+                hostname: 'p2.music.126.net',
+            },
         ],
     },
 }

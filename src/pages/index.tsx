@@ -1,9 +1,104 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { Carousel } from '@/components/main/Carousel'
-import { Recommend } from '@mui/icons-material'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import instance, { Base } from '@/util/axios';
+import { UserContext } from '@/components/login/UserContext';
+import { useContext, useEffect, useState } from 'react';
+import { Profile } from "@/pages/api/user";
+import { Recommendation } from '@/components/main/Recommendation';
+import { Banner } from './api/banner';
+import { RawRecommend } from '@/types/recommend/recommend';
+import { RawPlaylist } from '@/types/playlist/playlist';
 
-export default function Home() {
+const axios = instance(Base.IN);
+
+const fetchBanners = async () => {
+    let bannerList = await axios.get("/api/banner") as [];
+    // return bannerList.map((banner: Banner) => {
+    //     return {
+    //         imageUrl: banner.imageUrl,
+    //         title: banner.typeTitle,
+    //         targetID: banner.targetId
+    //     }
+    // });
+    return bannerList;
+}
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const bannerList: Banner[] = await fetchBanners();
+
+    return {
+        props: {
+            carouselData: {
+                bannerList
+            },
+        }
+    }
+}
+
+type HomeProps = {
+    carouselData: {
+        bannerList: Banner[]
+    }
+}
+
+export default function Home(props: HomeProps) {
+    const user = useContext(UserContext);
+    const [rawPlaylists, setRawPlaylists] = useState([] as RawPlaylist[]);
+
+    const fetchUserInfo = async (cookie: string) => {
+        const profile: Profile | null = await axios.get("api/user", {
+            params: {
+                cookie,
+            }
+        });
+        return profile;
+    }
+
+    const fetchDailySongs = async (cookie: string) => {
+        //test
+        const axios = instance(Base.EX);
+        const songs = await axios.get("/recommend/resource", {
+            params: {
+                cookie
+            }
+        });
+        return songs;
+    }
+
+    const fetchRecommendation = async (cookie: string) => {
+        const recommend: RawRecommend[] = await axios.get("api/recommend", {
+            params: {
+                cookie,
+            }
+        });
+        return recommend;
+    }
+
+
+    useEffect(() => {
+        const cookie: string = localStorage.getItem("cookie") as string;
+
+        // 初始化推荐歌单
+        fetchRecommendation(cookie).then(recommends => {
+            const rawPlaylists: Promise<RawPlaylist>[] = recommends.map(async recommend => {
+                const rawPlaylist: RawPlaylist = await axios.get("api/playlist/info", {
+                    params: {
+                        id: recommend.id,
+                    },
+                });
+                return rawPlaylist;
+            });
+
+            Promise.all(rawPlaylists).then((playlists) => {
+                console.log(playlists);
+                setRawPlaylists(playlists);
+            });
+        });
+
+    }, []);
+
     return (
         <div className={styles.main}>
             <Head>
@@ -12,8 +107,8 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Carousel />
-            {/* <Recommend /> */}
+            <Carousel data={props.carouselData} />
+            <Recommendation data={rawPlaylists} />
         </div>
     )
 }

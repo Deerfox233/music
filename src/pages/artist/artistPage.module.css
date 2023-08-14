@@ -1,0 +1,197 @@
+.artistInfo {
+    /* background-color: coral; */
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 350px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.info {
+    display: block;
+    overflow-y: hidden;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    width: 100%;
+}
+
+.info>* {
+    margin-top: 12px;
+}
+
+.info>*:first-child {
+    margin-top: 0px;
+}
+
+.title {
+    font-size: 24px;
+    color: #fa586a;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.avatarAndName {
+    width: inherit;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.statistics {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    color: #656565;
+}
+
+.description {
+    white-space: pre-line;
+    font-size: small;
+    color: #aaaaaa;
+    line-height: 25px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.description::-webkit-scrollbar {
+    display: none;
+}
+
+.latestRelease {
+    /* background-color: blueviolet; */
+    flex-shrink: 0;
+    width: 465px;
+    padding-bottom: 40px;
+    /* padding-left: 40px; */
+    z-index: 0;
+    mask-image: linear-gradient(to right, black calc(100% - 30px), transparent calc(100% - 20px));
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    color: #aaaaaa;
+    height: 24px;
+}
+
+.name {
+    /* background-color: #123; */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.amount {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    color: #656565;
+    height: 24px;
+    /* padding-left: 10px; */
+}
+
+.trackGrid {
+    /* background-color: #321; */
+    height: 242px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tracks {
+    /* background-color: #456; */
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+    align-content: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: inherit;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding-left: 10px;
+    mask-image: linear-gradient(to right,
+            transparent calc(0% - 0px),
+            black calc(0% + 10px),
+            black calc(100% - 10px),
+            transparent calc(100% - 0px));
+}
+
+.tracks::-webkit-scrollbar {
+    display: none;
+}
+
+.track {
+    width: 285px;
+    height: 54px;
+    display: grid;
+    align-items: center;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: small;
+    border-radius: 5px;
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 225px;
+    mask-image: linear-gradient(to right, black calc(100% - 10px), transparent calc(100%));
+}
+
+.songName {
+    color: #eeeeee;
+    display: flex;
+    align-items: center;
+}
+
+.albumGrid {
+    /* background-color: #321; */
+    height: 202px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.albums {
+    /* background-color: #fff; */
+    display: flex;
+    flex-flow: row wrap;
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.album {
+    /* background-color: #fff; */
+    width: 244px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.albumName {
+    /* background-color: #fff; */
+    width: inherit;
+    margin-top: 5px;
+    /* mask-image: linear-gradient(to right,
+            transparent calc(0% - 0px),
+            black calc(0% + 20px),
+            black calc(100% - 30px),
+            transparent calc(100% - 10px)); */
+}
+
+.shadow {
+    position: absolute;
+    z-index: 1;
+}

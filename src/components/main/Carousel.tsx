@@ -1,68 +1,50 @@
 import { useContext, useEffect, useState } from "react"
 import styles from "./Carousel.module.css"
 import Image from "next/image"
-import instance, { Base } from "@/util/axios";
 import { PlayerContext } from "../player/Player";
 import { Playlist } from "@/pages/api/playlist";
 import { Song } from "@/pages/api/song";
+import { Banner } from "@/pages/api/banner";
 
-export function Carousel() {
-    const [banners, setBanners] = useState([] as ({
-        imageUrl: string
-        title: string
-        targetID: string
-    }[]));
-    const axios = instance(Base.IN);
-
-    const fetchBanners = async () => {
-        let bannerList = await axios.get("/api/banner") as [];
-        return bannerList.map((banner: {
-            imageUrl: string,
-            typeTitle: string,
-            targetId: string
-        }) => {
-            return {
-                imageUrl: banner.imageUrl,
-                title: banner.typeTitle,
-                targetID: banner.targetId
-            }
-        });
+export function Carousel(props: {
+    data: {
+        bannerList: Banner[]
     }
+}) {
+
+    const [banners, setBanners] = useState([] as Banner[]);
+
 
     useEffect(() => {
-        const fetchData = async () => {
-            const bannerList: {
-                imageUrl: string
-                title: string
-                targetID: string
-            }[] = await fetchBanners();
-            setBanners(bannerList);
-        }
-        fetchData();
-    }, []);
+        setBanners(props.data.bannerList);
+    }, [banners, setBanners]);
+
 
     return (
         <div className={styles.carousel}>
-            {banners.map(banner => {
-                return (
-                    <span key={banner.imageUrl}>
-                        <Banner
-                            imageUrl={banner.imageUrl}
-                            title={banner.title}
-                            targetID={banner.targetID}
-                        />
-                    </span>
-                )
-            })}
+            {
+                banners.map(banner => {
+                    return (
+                        <span key={banner.imageUrl}>
+                            <Banner
+                                imageUrl={banner.imageUrl}
+                                typeTitle={banner.typeTitle}
+                                targetId={banner.targetId}
+                            />
+                        </span>
+                    )
+                })
+            }
         </div>
     )
 }
 
-type BannerProps = {
-    imageUrl: string,
-    title: string,
-    targetID: string
-}
+// type BannerProps = {
+//     imageUrl: string,
+//     title: string,
+//     targetID: string
+// }
+type BannerProps = Banner;
 
 export function Banner(props: BannerProps) {
     const player = useContext(PlayerContext);
@@ -72,11 +54,11 @@ export function Banner(props: BannerProps) {
             className={styles.banner}
             onClick={async () => {
                 const tempPlaylist = new Playlist();
-                const tempSong = new Song(props.targetID);
+                const tempSong = new Song(props.targetId);
 
                 await tempSong.fetchUrl();
                 tempPlaylist.tracks = [tempSong];
-                
+
                 await player.initPlaylist(tempPlaylist);
             }}
         >

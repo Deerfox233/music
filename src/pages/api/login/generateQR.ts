@@ -1,4 +1,4 @@
-import instance, { Base } from "../../util/axios";
+import instance, { Base } from "../../../util/axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const axios = instance(Base.EX);
@@ -8,8 +8,6 @@ type Data = {
 }
 
 export default function handler(request: NextApiRequest, response: NextApiResponse) {
-    console.log("[login]");
-
     return new Promise<void>(async (resolve, reject) => {
         try {
             const key = await generateQRKey();
@@ -46,15 +44,4 @@ const generateQRCode = async (key: string) => {
         }
     });
     return code.data;
-}
-
-const checkQRCodeStatus = async (key: string) => {
-    const timestamp = Date.now();
-    const status = await axios.get("/login/qr/check", {
-        params: {
-            key,
-            timestamp
-        }
-    });
-    return status;
 }

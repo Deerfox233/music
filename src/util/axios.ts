@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export enum Base {
     IN = "http://localhost:5000",
-    // EX = "http://localhost:3000",
-    EX = "https://netease-cloud-music-api-kevinacid.vercel.app",
+    EX = "http://localhost:3000",
+    // EX = "https://netease-cloud-music-api-orpin-chi.vercel.app",
 }
 
 const instance = (base: Base) => {
@@ -11,6 +11,9 @@ const instance = (base: Base) => {
         baseURL: base,
         timeout: 5000,
     });
+
+    // Set-Cookie
+    inst.defaults.withCredentials = true;
 
     // 请求拦截器
     inst.interceptors.request.use(config => {

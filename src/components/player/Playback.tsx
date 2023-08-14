@@ -7,16 +7,37 @@ import LoopRoundedIcon from '@mui/icons-material/LoopRounded';
 import ShuffleRoundedIcon from '@mui/icons-material/ShuffleRounded';
 import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 import { useContext, useEffect, useState } from "react";
-import { AudioContext, AudioContextProps } from "./AudioContext";
-import { PlayerContext, PlayerContextProps } from "./Player";
+import { AudioContext, AudioContextProps } from "@/components/player/AudioContext";
+import { PlayerContext, PlayerContextProps } from "@/components/player/Player";
 
 export function Playback() {
     const audio = useContext(AudioContext);
     const player = useContext(PlayerContext);
 
+
+    useEffect(() => {
+        const handleSpaceDown = (e) => {
+            if (e.code === "Space") {
+                // console.log("space");
+                if (audio.isPaused()) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            }
+        }
+
+        document.addEventListener("keydown", handleSpaceDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleSpaceDown);
+        }
+    }, []);
+
     return (
         <div className={styles.main}>
-            <div className={styles.playback}>
+            <div className={styles.playback}
+            >
                 <RandomButton />
                 <PreviousButton audio={audio} player={player} />
                 <PlayButton audio={audio} player={player} />

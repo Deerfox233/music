@@ -24,7 +24,8 @@
     font-weight: bold;
     font-size: small;
     color: #f1f1f1;
-    white-space: nowrap
+    white-space: nowrap;
+    height: 21px;
 }
 
 .artistList {
@@ -33,8 +34,7 @@
 }
 
 .artistName {
-    font-size: x-small;
-    color: #bbbbbb;
+    
 }
 
 .progressBar {

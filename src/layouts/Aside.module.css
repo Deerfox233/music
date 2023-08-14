@@ -8,7 +8,6 @@
     border-color: #3b3b3c;
     display: flex;
     flex-direction: column;
-    text-align: center;
 }
 
 .logo {
@@ -57,21 +56,15 @@
 
 .accountCard {
     /* background-color: aquamarine; */
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
     width: inherit;
     display: flex;
-    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 
-.avatar {
-    /* background-color: coral; */
-    width: 59px;
-    height: 59px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.avatar {}
 
 .username {
     /* background-color: cornflowerblue; */
@@ -91,4 +84,72 @@
     justify-content: center;
     font-size: small;
     font-weight: bold;
+}
+
+.playlistAside {
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    /* padding-top: 20px; */
+    text-align: center;
+    overflow: scroll;
+    mask-image: linear-gradient(to bottom,
+            transparent calc(0% + 0px),
+            black calc(0% + 10px),
+            black calc(100% - 30px),
+            transparent calc(100% - 20px));
+}
+
+.playlistAside::-webkit-scrollbar {
+    display: none;
+}
+
+.playlistAside>* {
+    /* margin-bottom: 5px; */
+}
+
+.playlistItem {
+    /* background-color: #3b3b3b; */
+    height: 32px;
+    width: 210px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: small;
+    color: #eeeeee;
+    white-space: nowrap;
+    overflow-y: hidden;
+}
+
+.playlistItem::-webkit-scrollbar {
+    display: none;
+}
+
+.playlistName {
+    /* background-color: darkblue; */
+    width: 100%;
+    display: flex;
+    mask-image: linear-gradient(to right, black calc(100% - 10px), transparent calc(100%));
+}
+
+
+.bottomMask {
+    /* background-color: #eeeeee; */
+    position: absolute;
+    height: 25px;
+    width: 260px;
+    bottom: 50px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+.myPlaylists {
+    font-size: smaller;
+    color: #fa586a;
+    width: 210px;
+    padding:10px;
+    display: flex;
 }

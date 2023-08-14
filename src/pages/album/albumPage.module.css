@@ -1,0 +1,64 @@
+.albumInfo {
+    /* background-color: coral; */
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 350px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.info {
+    display: block;
+    overflow-y: hidden;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    width: 100%;
+}
+
+.info>* {
+    margin-top: 12px;
+}
+
+.info>*:first-child {
+    margin-top: 0px;
+}
+
+.title {
+    font-size: 24px;
+    color: #ededed;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.avatarAndName {
+    width: inherit;
+    display: flex;
+    height: 30px;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-size: small;
+    color: #656565;
+}
+
+.description {
+    white-space: pre-line;
+    font-size: small;
+    color: #aaaaaa;
+    line-height: 25px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.description::-webkit-scrollbar {
+    display: none;
+}

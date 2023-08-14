@@ -24,17 +24,19 @@ export function LoginPane(props: LoginProps) {
     )
 }
 
+//二维码组件
 function QRCode(props: { setLoading: Dispatch<SetStateAction<boolean>> }) {
     const axios = instance(Base.IN);
     const [code, setCode] = useState("");
     const [key, setKey] = useState("");
     const [status, setStatus] = useState("");
 
+    //生成二维码
     const generateQRCode = async () => {
         const codeDetail: {
             code: string,
             key: string
-        } = await axios.get("/api/login");
+        } = await axios.get("/api/login/generateQR");
         setCode(codeDetail.code);
         //test
         setKey(codeDetail.key);
@@ -42,53 +44,54 @@ function QRCode(props: { setLoading: Dispatch<SetStateAction<boolean>> }) {
         return codeDetail.key;
     }
 
-    useEffect(() => {
+    //检查二维码状态
+    const checkQRStatus = async (key: string) => {
         const axios = instance(Base.EX);
+        const timestamp = Date.now();
+        const status: {
+            code: number,
+            message: string,
+            cookie: string
+        } = await axios.get("/login/qr/check", {
+            params: {
+                key,
+                timestamp
+            }
+        });
+        return status;
+    }
 
-        const checkQRStatus = async (key: string) => {
-            console.log("check key ", key);
-            const timestamp = Date.now();
-            const status: {
-                code: number,
-                message: string,
-                cookie: string
-            } = await axios.get("login/qr/check", {
-                params: {
-                    key,
-                    timestamp
-                }
-            });
+    // 根据cookie查询登录状态
+    const checkLoginStatus = async (cookie: string) => {
+        const status = await axios.get("api/login/checkLogin", {
+            params: {
+                cookie
+            }
+        });
+        return status;
+    }
 
-            return status;
-        }
-
-        const checkLoginStatus = async (cookie: string) => {
-            console.log("check login status");
-            const timestamp = Date.now();
-            const status = await axios.get("login/status", {
-                params: {
-                    cookie,
-                    timestamp
-                }
-            });
-
-            return status;
-        }
-
+    useEffect(() => {
         generateQRCode().then(key => {
+
             timerIDs.push(setInterval(async () => {
+
                 checkQRStatus(key).then(async status => {
+
                     props.setLoading(false);
+
                     for (let i = 0; i < timerIDs.length - 1; i++) {
                         clearInterval(timerIDs[i]);
                     }
+
                     setStatus(status.message);
-                    console.log(status);
+
+                    const loginState = await checkLoginStatus(localStorage.getItem("login") as string);
+                    console.log(loginState);
+
                     if (status.code === 803) {          // 验证成功操作
                         clearInterval(timerIDs[timerIDs.length - 1]);
-                        localStorage.setItem("loginCookie", status.cookie);
-                        const loginState = await checkLoginStatus(status.cookie);
-                        console.log(loginState);
+                        localStorage.setItem("cookie", status.cookie);
                     }
                 });
             }, 2000));
@@ -142,4 +145,3 @@ function CloseButton(props: LoginProps) {
         </div>
     )
 }
-

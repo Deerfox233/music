@@ -1,7 +1,27 @@
 .recommendation {
-    background-color: darkgreen;
+    /* background-color: darkgreen; */
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    overflow-x: scroll;
+}
+
+.recommendation>*:not(:last-child) {
+    margin-right: 20px;
 }
 
 .playlistCover {
-    
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow {
+    position: absolute;
+    transform: scale(0.92, 0.96);
+    z-index: 0  ;
+    background-size: cover;
 }

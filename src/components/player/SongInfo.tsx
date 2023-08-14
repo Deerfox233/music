@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import styles from "./SongInfo.module.css"
+import styles from "@/components/player/SongInfo.module.css"
 import Image from "next/image";
-import { PlayerContext, PlayerContextProps } from "./Player";
-import { AudioContext } from "./AudioContext";
-import { AudioContextProps } from "./AudioContext";
+import { PlayerContext, PlayerContextProps } from "@/components/player/Player";
+import { AudioContext } from "@/components/player/AudioContext";
+import { AudioContextProps } from "@/components/player/AudioContext";
+import Link from "next/link";
+import { Artist } from "@/pages/api/artist";
 
 export function SongInfo() {
     const player = useContext(PlayerContext);
@@ -45,10 +47,20 @@ function SongProgress(props: BannerProps) {
     const audio = props.audio;
     const player = props.player;
 
+    let artists: Artist[] | undefined;
+    if (player.currentTrack()?.artists !== undefined) {
+        artists = player.currentTrack()?.artists;
+    }
+
     return (
         <div className={styles.songProgress}>
             <SongName player={player} />
-            <ArtistList player={player} />
+            <ArtistList
+                artists={artists}
+                fontSize={"x-small"}
+                // fontWeight={"light"}
+                color="#bbbbbb"
+            />
             {player.currentTrack() ? <ProgressBar player={player} audio={audio} /> : <></>}
         </div>
     )
@@ -110,20 +122,41 @@ function SongName(props: PlayerAsProp) {
     )
 }
 
-function ArtistList(props: PlayerAsProp) {
-    const player = props.player;
+type ArtistListProps = {
+    artists: Artist[] | undefined,
+    fontSize: string,
+    // fontWeight: string,
+    color: string
+}
+
+export function ArtistList(props: ArtistListProps) {
+    const artists = props.artists;
+    const fontSize = props.fontSize;
+    // const fontWeight = props.fontWeight;
+    const color = props.color;
 
     let artistList;
-    if (player.currentTrack() !== undefined) {
-        artistList = player.currentTrack()!.artists!.map((artist, index) => {
+    if (artists !== undefined) {
+        artistList = artists.map((artist, index) => {
             return (
                 <span key={artist.name}>
-                    <a href={artist.name}
-                        className={styles.artistName}>
+                    <Link href={"/artist/" + artist.ID}
+                        style={{
+                            fontSize: fontSize,
+                            // fontWeight: fontWeight,
+                            color: color,
+                        }}
+                        onMouseEnter={() => {
+
+                        }}
+                    >
                         {artist.name}
-                    </a>
-                    {index !== player.currentTrack()!.artists!.length - 1 ?
-                        <span className={styles.artistName}>{"· "}</span> :
+                    </Link>
+                    {index !== artists.length - 1 ?
+                        <span style={{
+                            fontSize: fontSize,
+                            color: color
+                        }} >{"· "}</span> :
                         <></>
                     }
                 </span >

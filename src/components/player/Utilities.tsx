@@ -5,6 +5,8 @@ import QueueMusicRoundedIcon from '@mui/icons-material/QueueMusicRounded';
 import { AudioContext, AudioContextProps } from "./AudioContext";
 import Playlist from "./Playlist";
 import { PlayerContext, PlayerContextProps } from "./Player";
+import instance, { Base } from "@/util/axios";
+import { UserContext } from "@/components/login/UserContext";
 
 export function Utilities() {
     const audio = useContext(AudioContext);
@@ -53,13 +55,18 @@ function PlaylistButton(props: PlaylistButtonProps) {
     const [isListDisplayed, setListDisplayed] = useState(false);
     const player = props.player;
 
+    //test
+    const user = useContext(UserContext);
+
     return (
         <div className={styles.playlistButton}>
             <div
                 onClick={async () => {
                     setListDisplayed(!isListDisplayed);
                     //test
-                    await player.initPlaylistByID("6892772775");
+                    // await player.initPlaylistByID("7396274610", 0);
+
+
                 }}
             >
                 <QueueMusicRoundedIcon htmlColor="#b3b3b3" style={{ fontSize: 30 }} />

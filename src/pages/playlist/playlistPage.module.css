@@ -1,0 +1,119 @@
+.playlistInfo {
+    /* background-color: coral; */
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: 350px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.info {
+    display: block;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.info>* {
+    margin-top: 12px;
+}
+
+.info>*:first-child {
+    margin-top: 0px;
+}
+
+.title {
+    font-size: 24px;
+    color: #ededed;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.avatarAndName {
+    width: inherit;
+    display: flex;
+    height: 30px;
+}
+
+.username {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-size: small;
+    color: #fa586a;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-size: small;
+    color: #656565;
+}
+
+.description {
+    white-space: pre-line;
+    font-size: small;
+    color: #aaaaaa;
+    line-height: 25px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.description::-webkit-scrollbar {
+    display: none;
+}
+
+.trackList {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.columnTitle {
+    display: grid;
+    grid-template-columns: 38% 27% 25% 10%;
+    height: 32px;
+    font-size: small;
+    font-weight: bold;
+    color: #aeaeae;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.track {
+    height: 54px;
+    display: grid;
+    grid-template-columns: 38% 27% 25% 10%;
+    align-items: center;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: small;
+    /* color: #aeaeae; */
+    border-radius: 5px;
+}
+
+.songName {
+    color: #eeeeee;
+    display: flex;
+    align-items: center;
+}
+
+.artists {
+    mask-image: linear-gradient(to right, black calc(100% - 30px), transparent calc(100% - 20px));
+}
+
+.albumName {}
+
+.duration {}
+
+.shadow {
+    position: absolute;
+    z-index: 1;
+}
